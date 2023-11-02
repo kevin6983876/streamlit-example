@@ -6,7 +6,9 @@ import streamlit as st
 """
 # Chemicals usage tracking app
 """
-data = pd.read_csv('data.csv')
-st.text(data)
+data = pd.read_csv('overview_of_chemical.csv')
 
-usage = st.number('usage in ml')
+usage = st.number_input('usage in ml', value = 0.0)
+buy = st.number_input('newly added', value = 0.0)
+
+
