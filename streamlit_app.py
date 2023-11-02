@@ -14,3 +14,6 @@ buy = st.number_input('newly added', value = 0.0)
 reset = st.number_input('reset', value = 0.0)
 
 option = st.button('submit')
+
+st.write('### Current deposit')
+print(data)
