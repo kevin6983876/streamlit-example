@@ -16,4 +16,4 @@ reset = st.number_input('reset', value = 0.0)
 option = st.button('submit')
 
 st.write('### Current deposit')
-print(data)
+st.dataframe(data)
