@@ -10,5 +10,5 @@ data = pd.read_csv('data.csv', sep=',')
 
 usage = st.number_input('usage in ml', value = 0.0)
 buy = st.number_input('newly added', value = 0.0)
-
+reset = st.number_input('reset', value = 0.0)
 
