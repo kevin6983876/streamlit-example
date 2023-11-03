@@ -137,5 +137,5 @@ if np.float32(last_stock["RGP (bottles)"])<20:
     st.write('### RGP (bottles) is running low!')
 if np.float32(last_stock["Wash buffer A (pack)"])<10:
     st.write('### Wash buffer A (pack) is running low!')
-if np.float32(last_stock["Sample/Detector Diluent (bottles)"])<6:
+if np.float32(last_stock["Wash buffer B (pack)"])<6:
     st.write('### Wash buffer B (pack) is running low!')
