@@ -6,6 +6,10 @@ import streamlit as st
 """
 # Chemicals usage tracking app
 """
+operation = st.selectbox('Operation',('Experiment, Purchase, Check stock))
+if operation == 'Experiment':
+    sample = st.number_input('Sample/Detector Diluent (ml)', 0.0)                                      
+    bead = st.number_input('Bead diluent (ml)', 0.0)
 data = pd.read_csv('data.csv', sep=',')
 st.write('### Current deposit')
 st.dataframe(data)
