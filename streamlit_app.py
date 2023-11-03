@@ -7,6 +7,8 @@ import datetime
 # SIMOA consumable inventory
 """
 operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
+user = st.selectbox('Username',('Matthew','Lizzie','Trevor',
+'Jeff', 'Emre', 'Dorothea','Ron','Florence'))
 st.write('---')
 stock = pd.read_csv('stock.csv')
 if operation == 'Experiment':
