@@ -4,19 +4,21 @@ import streamlit as st
 import datetime
 
 """
-# SIMOA consumable inventory
+# Chemicals usage tracking app
 """
 operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
-user = st.selectbox('Username',('Matthew','Lizzie','Trevor',
-'Jeff', 'Emre', 'Dorothea','Ron','Florence'))
+username = st.selectbox('User',('Matthew', 'Lizzie', 
+'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'))
 st.write('---')
+
+# exp_purchase = pd.read_csv('exp_purchase.csv')
 stock = pd.read_csv('stock.csv')
 if operation == 'Experiment':
     sample = st.number_input('Sample/Detector Diluent (ml)', 0)/250                                      
     bead = st.number_input('Bead diluent (ml)', 0)/100
     SBG_diluent = st.number_input('SBG diluent (ml)',0)/100
     SBG_concentrate = st.number_input(r'SBG concentrate ($\mu$l)',0)/1000
-    disc = st.number_input('Disc',0)
+    disc = st.number_input('Disc',0)/16
     plate = st.number_input('Plate',0)
     RGP = st.number_input('RGP (bottle)', 0)
     wash_buffer_A = st.number_input('Wash buffer A (pack)',0)
@@ -27,7 +29,7 @@ if operation == 'Experiment':
         current_date = current_datetime.date()
         current_time = current_datetime.time()
         new_row = {"Date":str(current_date), "Time":str(current_time),
-                   "Operation":'Exp',
+                   "User":username,"Operation":'Exp',
                     "Sample/Detector Diluent (bottles)":sample,
                     'Bead diluent (bottles)':bead,
                     'SBG diluent (bottles)':SBG_diluent ,
@@ -36,14 +38,14 @@ if operation == 'Experiment':
                     'Plate':plate, 'RGP (bottles)': RGP, 
                     'Wash buffer A (pack)': wash_buffer_A,
                     'Wash buffer B (pack)': wash_buffer_B}
-        exp = pd.DataFrame([new_row],index=[12])
+        exp = pd.DataFrame([new_row],index=[13])
         stock_tmp = pd.concat([stock, exp], ignore_index=True)
         last_stock = stock.tail(1)
         last_stock_array = last_stock.to_numpy()
         exp_array = exp.to_numpy()
-        new_stock = last_stock_array[0,3:]-exp_array[0,3:]
+        new_stock = last_stock_array[0,4:]-exp_array[0,4:]
         new_stock_list = new_stock.tolist()
-        new_stock = np.array([[str(current_date),str(current_time),'Stock']+new_stock_list])
+        new_stock = np.array([[str(current_date),str(current_time),username,'Stock']+new_stock_list])
         new_stock_series = pd.DataFrame(new_stock, columns=exp.columns)
         stock = pd.concat([stock_tmp, new_stock_series], ignore_index=True)
         st.dataframe(stock)
@@ -64,7 +66,7 @@ if operation == 'Purchase':
         current_date = current_datetime.date()
         current_time = current_datetime.time()
         new_row = {"Date":str(current_date), "Time":str(current_time),
-                   "Operation":'Purchase',
+                   "User":username,"Operation":'Purchase',
                     "Sample/Detector Diluent (bottles)":sample,
                     'Bead diluent (bottles)':bead,
                     'SBG diluent (bottles)':SBG_diluent ,
@@ -73,14 +75,14 @@ if operation == 'Purchase':
                     'Plate':plate, 'RGP (bottles)': RGP, 
                     'Wash buffer A (pack)': wash_buffer_A,
                     'Wash buffer B (pack)': wash_buffer_B}
-        purchase = pd.DataFrame([new_row],index=[12])
+        purchase = pd.DataFrame([new_row],index=[13])
         stock_tmp = pd.concat([stock, purchase], ignore_index=True)
         last_stock = stock.tail(1)
         last_stock_array = last_stock.to_numpy()
         purchase_array = purchase.to_numpy()
-        new_stock = last_stock_array[0,3:]+purchase_array[0,3:]
+        new_stock = last_stock_array[0,4:]+purchase_array[0,4:]
         new_stock_list = new_stock.tolist()
-        new_stock = np.array([[str(current_date),str(current_time),'Stock']+new_stock_list])
+        new_stock = np.array([[str(current_date),str(current_time),username,'Stock']+new_stock_list])
         new_stock_series = pd.DataFrame(new_stock, columns=purchase.columns)
         stock = pd.concat([stock_tmp, new_stock_series], ignore_index=True)
         st.dataframe(stock)
@@ -101,7 +103,7 @@ if operation == 'Check stock':
         current_date = current_datetime.date()
         current_time = current_datetime.time()
         new_row = {"Date":str(current_date), "Time":str(current_time),
-                   "Operation":'Stock',
+                   "User":username,"Operation":'Stock',
                     "Sample/Detector Diluent (bottles)":sample,
                     'Bead diluent (bottles)':bead,
                     'SBG diluent (bottles)':SBG_diluent ,
@@ -110,9 +112,28 @@ if operation == 'Check stock':
                     'Plate':plate, 'RGP (bottles)': RGP, 
                     'Wash buffer A (pack)': wash_buffer_A,
                     'Wash buffer B (pack)': wash_buffer_B}
-        new_stock = pd.DataFrame([new_row],index=[12])
+        new_stock = pd.DataFrame([new_row],index=[13])
         stock = pd.concat([stock, new_stock], ignore_index=True)
         st.dataframe(stock)
         stock.to_csv('stock.csv', index=False)
 st.write('### View stock')
 st.dataframe(stock)
+last_stock = stock.tail(1)
+if np.float32(last_stock["Sample/Detector Diluent (bottles)"])<2.5:
+    st.text('Sample/Detector Diluent (bottles) is running low!')
+if np.float32(last_stock["Bead diluent (bottles)"])<2:
+    st.text('Bead diluent (bottles) is running low!')
+if np.float32(last_stock["SBG diluent (bottles)"])<3:
+    st.text('SBG diluent (bottles) is running low!')
+if np.float32(last_stock["SBG concentrate (vials)"])<1:
+    st.text('SBG concentrate (vials) is running low!')
+if np.float32(last_stock["Disc (packs of 16)"])<5:
+    st.text('Disc (packs of 16) is running low!')
+if np.float32(last_stock["Plate"])<30:
+    st.text('Plate is running low!')
+if np.float32(last_stock["RGP (bottles)"])<20:
+    st.text('RGP (bottles) is running low!')
+if np.float32(last_stock["Wash buffer A (pack)"])<10:
+    st.text('Wash buffer A (pack) is running low!')
+if np.float32(last_stock["Sample/Detector Diluent (bottles)"])<6:
+    st.text('Wash buffer B (pack) is running low!')
