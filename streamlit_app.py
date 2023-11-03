@@ -4,7 +4,7 @@ import streamlit as st
 import datetime
 
 """
-# Chemicals usage tracking app
+# SIMOA consumable inventory
 """
 operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
 st.write('---')
