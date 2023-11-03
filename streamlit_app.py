@@ -4,7 +4,7 @@ import streamlit as st
 import datetime
 
 """
-# Chemicals usage tracking app
+# SIMOA consumable inventory
 """
 operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
 username = st.selectbox('User',('Matthew', 'Lizzie', 
@@ -13,12 +13,13 @@ st.write('---')
 
 # exp_purchase = pd.read_csv('exp_purchase.csv')
 stock = pd.read_csv('stock.csv')
+last_stock = stock.tail(1)
 if operation == 'Experiment':
     sample = st.number_input('Sample/Detector Diluent (ml)', 0)/250                                      
     bead = st.number_input('Bead diluent (ml)', 0)/100
     SBG_diluent = st.number_input('SBG diluent (ml)',0)/100
     SBG_concentrate = st.number_input(r'SBG concentrate ($\mu$l)',0)/1000
-    disc = st.number_input('Disc',0)/16
+    disc = st.number_input('Disc (pack of 16)',0)/16
     plate = st.number_input('Plate',0)
     RGP = st.number_input('RGP (bottle)', 0)
     wash_buffer_A = st.number_input('Wash buffer A (pack)',0)
@@ -55,7 +56,7 @@ if operation == 'Purchase':
     bead = st.number_input('Bead diluent (bottles)', 0)
     SBG_diluent = st.number_input('SBG diluent (bottles)',0)
     SBG_concentrate = st.number_input(r'SBG concentrate (vials)',0)
-    disc = st.number_input('Disc',0)
+    disc = st.number_input('Disc (pack of 16)',0)
     plate = st.number_input('Plate',0)
     RGP = st.number_input('RGP (bottle)', 0)
     wash_buffer_A = st.number_input('Wash buffer A (pack)',0)
@@ -92,7 +93,7 @@ if operation == 'Check stock':
     bead = st.number_input('Bead diluent (bottles)', 0.0)
     SBG_diluent = st.number_input('SBG diluent (bottles)',0.0)
     SBG_concentrate = st.number_input(r'SBG concentrate (vials)',0.0)
-    disc = st.number_input('Disc',0)
+    disc = st.number_input('Disc (pack of 16)',0)
     plate = st.number_input('Plate',0)
     RGP = st.number_input('RGP (bottle)', 0)
     wash_buffer_A = st.number_input('Wash buffer A (pack)',0)
@@ -118,22 +119,23 @@ if operation == 'Check stock':
         stock.to_csv('stock.csv', index=False)
 st.write('### View stock')
 st.dataframe(stock)
-last_stock = stock.tail(1)
+
+st.write('# WARNING')
 if np.float32(last_stock["Sample/Detector Diluent (bottles)"])<2.5:
-    st.text('Sample/Detector Diluent (bottles) is running low!')
+    st.write('### Sample/Detector Diluent (bottles) is running low!')
 if np.float32(last_stock["Bead diluent (bottles)"])<2:
-    st.text('Bead diluent (bottles) is running low!')
+    st.write('### Bead diluent (bottles) is running low!')
 if np.float32(last_stock["SBG diluent (bottles)"])<3:
-    st.text('SBG diluent (bottles) is running low!')
+    st.write('### SBG diluent (bottles) is running low!')
 if np.float32(last_stock["SBG concentrate (vials)"])<1:
-    st.text('SBG concentrate (vials) is running low!')
+    st.write('### SBG concentrate (vials) is running low!')
 if np.float32(last_stock["Disc (packs of 16)"])<5:
-    st.text('Disc (packs of 16) is running low!')
+    st.write('### Disc (packs of 16) is running low!')
 if np.float32(last_stock["Plate"])<30:
-    st.text('Plate is running low!')
+    st.write('### Plate is running low!')
 if np.float32(last_stock["RGP (bottles)"])<20:
-    st.text('RGP (bottles) is running low!')
+    st.write('### RGP (bottles) is running low!')
 if np.float32(last_stock["Wash buffer A (pack)"])<10:
-    st.text('Wash buffer A (pack) is running low!')
+    st.write('### Wash buffer A (pack) is running low!')
 if np.float32(last_stock["Sample/Detector Diluent (bottles)"])<6:
-    st.text('Wash buffer B (pack) is running low!')
+    st.write('### Wash buffer B (pack) is running low!')
