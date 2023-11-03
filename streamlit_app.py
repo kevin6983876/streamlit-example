@@ -8,7 +8,6 @@ import datetime
 """
 operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
 st.write('---')
-# exp_purchase = pd.read_csv('exp_purchase.csv')
 stock = pd.read_csv('stock.csv')
 if operation == 'Experiment':
     sample = st.number_input('Sample/Detector Diluent (ml)', 0)/250                                      
