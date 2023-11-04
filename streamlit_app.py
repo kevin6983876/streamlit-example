@@ -18,7 +18,7 @@ if operation == 'Experiment':
     bead = st.number_input('Bead diluent (ml)', 0)/100
     SBG_diluent = st.number_input('SBG diluent (ml)',0)/100
     SBG_concentrate = st.number_input(r'SBG concentrate ($\mu$l)',0)/1000
-    disc = st.number_input('Disc (pack of 16)',0)/16
+    disc = st.number_input('Disc',0)/16
     plate = st.number_input('Plate',0)
     RGP = st.number_input('RGP (bottle)', 0)
     wash_buffer_A = st.number_input('Wash buffer A (pack)',0)
