@@ -116,7 +116,7 @@ if operation == 'Check stock':
         stock = pd.concat([stock, new_stock], ignore_index=True)
         st.dataframe(stock)
         stock.to_csv('stock.csv', index=False)
-view_stock = st.checkbox('### View stock')
+view_stock = st.button('### View stock')
 if view_stock:
     last_stock = stock.tail(1)
     st.dataframe(last_stock)
