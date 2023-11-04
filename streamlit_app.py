@@ -116,10 +116,6 @@ if operation == 'Check stock':
         stock = pd.concat([stock, new_stock], ignore_index=True)
         st.dataframe(stock)
         stock.to_csv('stock.csv', index=False)
-view_stock = st.button('### View stock')
-if view_stock:
-    last_stock = stock.tail(1)
-    st.dataframe(last_stock)
 last_stock = stock.tail(1)
 if np.float32(last_stock["Sample/Detector Diluent (bottles)"])<2.5:
     st.write('### WARNING: Sample/Detector Diluent (bottles) is running low!')
@@ -139,3 +135,7 @@ if np.float32(last_stock["Wash buffer A (pack)"])<10:
     st.write('### WARNING: Wash buffer A (pack) is running low!')
 if np.float32(last_stock["Wash buffer B (pack)"])<6:
     st.write('### WARNING: Wash buffer B (pack) is running low!')
+view_stock = st.button('### View stock')
+if view_stock:
+    last_stock = stock.tail(1)
+    st.dataframe(last_stock)
