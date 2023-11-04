@@ -13,7 +13,6 @@ st.write('---')
 
 # exp_purchase = pd.read_csv('exp_purchase.csv')
 stock = pd.read_csv('stock.csv')
-last_stock = stock.tail(1)
 if operation == 'Experiment':
     sample = st.number_input('Sample/Detector Diluent (ml)', 0)/250                                      
     bead = st.number_input('Bead diluent (ml)', 0)/100
@@ -117,25 +116,26 @@ if operation == 'Check stock':
         stock = pd.concat([stock, new_stock], ignore_index=True)
         st.dataframe(stock)
         stock.to_csv('stock.csv', index=False)
-st.write('### View stock')
-st.dataframe(stock)
-
-st.write('# WARNING')
+view_stock = st.checkbox('### View stock')
+if view_stock:
+    last_stock = stock.tail(1)
+    st.dataframe(last_stock)
+last_stock = stock.tail(1)
 if np.float32(last_stock["Sample/Detector Diluent (bottles)"])<2.5:
-    st.write('### Sample/Detector Diluent (bottles) is running low!')
+    st.write('### WARNING: Sample/Detector Diluent (bottles) is running low!')
 if np.float32(last_stock["Bead diluent (bottles)"])<2:
-    st.write('### Bead diluent (bottles) is running low!')
+    st.write('### WARNING: Bead diluent (bottles) is running low!')
 if np.float32(last_stock["SBG diluent (bottles)"])<3:
-    st.write('### SBG diluent (bottles) is running low!')
+    st.write('### WARNING: SBG diluent (bottles) is running low!')
 if np.float32(last_stock["SBG concentrate (vials)"])<1:
-    st.write('### SBG concentrate (vials) is running low!')
+    st.write('### WARNING: SBG concentrate (vials) is running low!')
 if np.float32(last_stock["Disc (packs of 16)"])<5:
-    st.write('### Disc (packs of 16) is running low!')
+    st.write('### WARNING: Disc (packs of 16) is running low!')
 if np.float32(last_stock["Plate"])<30:
-    st.write('### Plate is running low!')
+    st.write('### WARNING: Plate is running low!')
 if np.float32(last_stock["RGP (bottles)"])<20:
-    st.write('### RGP (bottles) is running low!')
+    st.write('### WARNING: RGP (bottles) is running low!')
 if np.float32(last_stock["Wash buffer A (pack)"])<10:
-    st.write('### Wash buffer A (pack) is running low!')
+    st.write('### WARNING: Wash buffer A (pack) is running low!')
 if np.float32(last_stock["Wash buffer B (pack)"])<6:
-    st.write('### Wash buffer B (pack) is running low!')
+    st.write('### WARNING: Wash buffer B (pack) is running low!')
