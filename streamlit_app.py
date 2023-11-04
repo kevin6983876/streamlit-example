@@ -135,7 +135,8 @@ if np.float32(last_stock["Wash buffer A (pack)"])<10:
     st.write('### WARNING: Wash buffer A (pack) is running low!')
 if np.float32(last_stock["Wash buffer B (pack)"])<6:
     st.write('### WARNING: Wash buffer B (pack) is running low!')
-view_stock = st.button('### View stock')
+st.write('---')
+view_stock = st.button('### View current stock')
 if view_stock:
     last_stock = stock.tail(1)
     st.dataframe(last_stock)
