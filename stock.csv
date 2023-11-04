@@ -1,4 +1,6 @@
 Date,Time,User,Operation,Sample/Detector Diluent (bottles),Bead diluent (bottles),SBG diluent (bottles),SBG concentrate (vials),Disc (packs of 16),Plate,RGP (bottles),Wash buffer A (pack),Wash buffer B (pack)
-2023-11-03,20:55:22.054461,Trevor,Stock,1.0,1.0,1.0,1.0,1,1,1,1,1
-2023-11-03,21:45:23.437285,Trevor,Exp,0.0,1.0,0.0,0.0,0,0,0,0,0
-2023-11-03,21:45:23.437285,Trevor,Stock,1.0,0.0,1.0,1.0,1,1,1,1,1
+2023-11-03,20:55:22.054461,Trevor,Stock,1.0,1.0,1.0,1.0,1.0,1,1,1,1
+2023-11-03,21:45:23.437285,Trevor,Exp,0.0,1.0,0.0,0.0,0.0,0,0,0,0
+2023-11-03,21:45:23.437285,Trevor,Stock,1.0,0.0,1.0,1.0,1.0,1,1,1,1
+2023-11-04,09:34:26.045372,Matthew,Exp,0.4,1.0,1.0,0.1,6.25,99,100,100,100
+2023-11-04,09:34:26.045372,Matthew,Stock,0.6,-1.0,0.0,0.9,-5.25,-98,-99,-99,-99
