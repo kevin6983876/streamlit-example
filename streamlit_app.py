@@ -11,12 +11,14 @@ if report_issue:
     username = st.selectbox('User',('Matthew', 'Lizzie', 
     'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'),key=2)
     message = st.text_input('message',value='')
-    error = pd.read_csv('error.csv')
-    current_datetime = datetime.datetime.now()
-    new_row = {"Name":username, "Time":str(current_datetime),"message":message}
-    new_error_message = pd.DataFrame([new_row],index=[3])
-    error = pd.concat([error, new_error_message], ignore_index=True)
-    error.to_csv('error.csv', index=False)
+    submit_an_issue = st.button('Submit', key=2)
+    if submit_an_issue:
+        error = pd.read_csv('error.csv')
+        current_datetime = datetime.datetime.now()
+        new_row = {"Name":username, "Time":str(current_datetime),"message":message}
+        new_error_message = pd.DataFrame([new_row],index=[3])
+        error = pd.concat([error, new_error_message], ignore_index=True)
+        error.to_csv('error.csv', index=False)
 view_previous_message = st.button('View previous message')
 if view_previous_message:
     error = pd.read_csv('error.csv')
