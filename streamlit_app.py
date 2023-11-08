@@ -6,6 +6,11 @@ import datetime
 """
 # SIMOA consumable inventory
 """
+st.write('---')
+operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
+username = st.selectbox('User',('Matthew', 'Lizzie', 
+'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'))
+st.write('---')
 stock = pd.read_csv('stock.csv')
 if operation == 'Experiment':
     sample = st.number_input('Sample/Detector Diluent (ml)', 0)/250                                      
@@ -151,8 +156,5 @@ view_previous_message = st.button('View previous message')
 if view_previous_message:
     error = pd.read_csv('error.csv')
     st.dataframe(error)
-st.write('---')
-operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
-username = st.selectbox('User',('Matthew', 'Lizzie', 
-'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'))
+
 
