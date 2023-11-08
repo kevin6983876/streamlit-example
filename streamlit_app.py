@@ -8,10 +8,10 @@ import datetime
 """
 report_issue = st.button('Report an issue')
 if report_issue:
-    username = st.selectbox('User',('Matthew', 'Lizzie', 
+    username = st.selectbox('Username',('Matthew', 'Lizzie', 
     'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'),key=2)
     message = st.text_input('message',value='')
-    submit_an_issue = st.button('Submit', key=2)
+    submit_an_issue = st.button('Submit issue')
     if submit_an_issue:
         error = pd.read_csv('error.csv')
         current_datetime = datetime.datetime.now()
