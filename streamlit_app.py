@@ -17,6 +17,10 @@ if report_issue:
     new_error_message = pd.DataFrame([new_row],index=[3])
     error = pd.concat([error, new_error_message], ignore_index=True)
     error.to_csv('error.csv', index=False)
+view_previous_message = st.button('View previous message')
+if view_previous_message:
+    error = pd.read_csv('error.csv')
+    st.dataframe(error)
 operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
 username = st.selectbox('User',('Matthew', 'Lizzie', 
 'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'))
