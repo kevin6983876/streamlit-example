@@ -6,6 +6,25 @@ import datetime
 """
 # SIMOA consumable inventory
 """
+report_issue = st.button('Report an issue')
+if report_issue:
+    username = st.selectbox('User',('Matthew', 'Lizzie', 
+    'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'))
+    message = st.text_input('message',value='')
+    error = pd.read_csv('error.csv')
+    current_datetime = datetime.datetime.now()
+    new_row = {"":str(current_date), "Time":str(current_datetime),
+                       "User":username,"Operation":'Exp',
+                        "Sample/Detector Diluent (bottles)":sample,
+                        'Bead diluent (bottles)':bead,
+                        'SBG diluent (bottles)':SBG_diluent ,
+                        'SBG concentrate (vials)':SBG_concentrate,
+                        'Disc (packs of 16)':disc,
+                        'Plate':plate, 'RGP (bottles)': RGP, 
+                        'Wash buffer A (pack)': wash_buffer_A,
+                        'Wash buffer B (pack)': wash_buffer_B}
+     = pd.DataFrame([new_row],index=[13])
+
 operation = st.selectbox('Operation',('Experiment', 'Purchase', 'Check stock'))
 username = st.selectbox('User',('Matthew', 'Lizzie', 
 'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'))
