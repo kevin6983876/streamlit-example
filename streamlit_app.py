@@ -145,8 +145,8 @@ username = st.selectbox('Username',('Matthew', 'Lizzie',
 'Trevor', 'Jeff', 'Emre', 'Dorothea', 'Ron', 'Florence'),key=2)
 message = st.text_input('message',value='')
 submit_an_issue = st.button('Submit issue')
+error = pd.read_csv('error.csv')
 if submit_an_issue:
-    error = pd.read_csv('error.csv')
     current_datetime = datetime.datetime.now()
     new_row = {"Name":username, "Time":str(current_datetime),"message":message}
     new_error_message = pd.DataFrame([new_row],index=[3])
