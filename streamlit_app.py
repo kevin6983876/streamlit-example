@@ -20,8 +20,8 @@ if operation == 'Experiment':
     disc = st.number_input('Disc',0)/16
     plate = st.number_input('Plate',0)
     RGP = st.number_input('RGP (bottle)', 0)
-    wash_buffer_A = st.number_input('Wash buffer A (pack)',0)
-    wash_buffer_B = st.number_input('Wash buffer B (pack)',0)
+    wash_buffer_A = st.number_input('Wash buffer A (pack)',0.0)
+    wash_buffer_B = st.number_input('Wash buffer B (pack)',0.0)
     submit = st.button('submit')
     if submit:
         current_datetime = datetime.datetime.now()
@@ -57,8 +57,8 @@ if operation == 'Purchase':
     disc = st.number_input('Disc (pack of 16)',0)
     plate = st.number_input('Plate',0)
     RGP = st.number_input('RGP (bottle)', 0)
-    wash_buffer_A = st.number_input('Wash buffer A (pack)',0)
-    wash_buffer_B = st.number_input('Wash buffer B (pack)',0)
+    wash_buffer_A = st.number_input('Wash buffer A (pack)',0.0)
+    wash_buffer_B = st.number_input('Wash buffer B (pack)',0.0)
     submit = st.button('submit')
     if submit:
         current_datetime = datetime.datetime.now()
@@ -94,8 +94,8 @@ if operation == 'Check stock':
     disc = st.number_input('Disc (pack of 16)',0)
     plate = st.number_input('Plate',0)
     RGP = st.number_input('RGP (bottle)', 0)
-    wash_buffer_A = st.number_input('Wash buffer A (pack)',0)
-    wash_buffer_B = st.number_input('Wash buffer B (pack)',0)
+    wash_buffer_A = st.number_input('Wash buffer A (pack)',0.0)
+    wash_buffer_B = st.number_input('Wash buffer B (pack)',0.0)
     submit = st.button('submit')
     if submit:
         current_datetime = datetime.datetime.now()
