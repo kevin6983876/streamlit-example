@@ -151,6 +151,7 @@ if submit_an_issue:
     new_row = {"Name":username, "Time":str(current_datetime),"message":message}
     new_error_message = pd.DataFrame([new_row],index=[3])
     error = pd.concat([error, new_error_message], ignore_index=True)
+    st.dataframe(error)
     error.to_csv('error.csv', index=False)
 view_previous_message = st.button('View previous message')
 if view_previous_message:
