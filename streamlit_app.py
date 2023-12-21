@@ -2,6 +2,40 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import datetime
+from selenium import webdriver
+import time
+
+# Set the specific time to wait for (replace with your desired time)
+target_time = datetime.datetime.combine(datetime.date.today(), datetime.time(15, 00))
+st.text(target_time)
+# Get the current time
+current_time = datetime.datetime.now()
+
+# Calculate the time difference
+time_difference = target_time - current_time
+
+# Wait until the specified time
+if time_difference.total_seconds() > 0:
+    print(f"Waiting for {time_difference.total_seconds()} seconds until {target_time}")
+    time.sleep(time_difference.total_seconds())
+
+# The code after the sleep will be executed at the specified time
+st.text(f"Now it's {datetime.datetime.now()}, time to execute your code!")
+url = 'https://drigit-ssvyzdmjfewiw4taltd4yr.streamlit.app/'
+
+# Create a new instance of the Firefox driver (you can use other drivers like Chrome)
+driver = webdriver.Chrome()
+
+# Open the URL in the browser
+driver.get(url)
+time.sleep(10)
+
+# # Print the content of the page
+# print(driver.page_source)
+
+# # Close the browser
+driver.quit()
+
 
 """
 # SIMOA consumable inventory - Chemistry Department
